@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+	<!-- Change logs home value (do not specify trailing directory separator) -->
+	<!-- NB: you can use / as separator for both Win and Unix style OS -->
+	<property scope="context" name="LOGS_HOME" value="/temp/logs"/>
+	
+	<!-- Standard appender - STDOUT -->
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- WT standard appender - STDOUT -->
+	<appender name="wt-stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- WT file appender - ROLLING (# + size) -->
+	<!-- NB: keep only one 'wt-rollingfile' active at the same time -->
+	<!--
+	<appender name="wt-rollingfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOGS_HOME}/webtop.log</file>
+		<encoder>
+			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${LOGS_HOME}/webtop.%i.log</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>15</maxIndex>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>10MB</maxFileSize>
+		</triggeringPolicy>
+	</appender>
+	-->
+	
+	<!-- WT file appender - ROLLING (time + size) -->
+	<!-- NB: keep only one 'wt-rollingfile' active at the same time -->
+	<appender name="wt-rollingfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOGS_HOME}/webtop.log</file>
+		<encoder>
+			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOGS_HOME}/webtop-%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>15</maxHistory>
+			<totalSizeCap>150MB</totalSizeCap>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>10MB</maxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	<root level="OFF">
+		<!-- Keep commented, otherwise each log entry will be doubled! -->
+		<!--<appender-ref ref="wt-rollingfile" />-->
+	</root>
+	<logger name="ch.qos.logback" level="OFF">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+	<logger name="com.zaxxer.hikari" level="ERROR">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+	<logger name="org.quartz" level="OFF">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+	<logger name="org.jooq" level="ERROR">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+	<logger name="org.apache.shiro" level="ERROR">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+	<logger name="com.sonicle.security" level="ERROR">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+	<logger name="com.sonicle.commons" level="ERROR">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+	<logger name="com.sonicle.security" level="ERROR">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+	<logger name="com.sonicle.mail" level="ERROR">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+	<logger name="com.sonicle.vfs2" level="ERROR">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+	<logger name="com.sonicle.webtop.core" level="INFO">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+	<logger name="com.sonicle.webtop.calendar" level="INFO">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+	<logger name="com.sonicle.webtop.contacts" level="INFO">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+	<logger name="com.sonicle.webtop.mail" level="INFO">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+	<logger name="com.sonicle.webtop.tasks" level="INFO">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+	<logger name="com.sonicle.webtop.vfs" level="INFO">
+		<appender-ref ref="wt-rollingfile" />
+	</logger>
+</configuration>

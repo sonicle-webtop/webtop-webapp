@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	The basic structure of this configuration file can be described as 
+	<configuration> element containing one or more <service> elements.
+	Then each service elements must contain one or more <dataSource> 
+	elements.
+	
+	The <service> element
+	Very simple element providing only 'id' attribute that represents 
+	the service ID. Each id attributes must be unique and differ from 
+	the others. The configuration file must contains at least a <service> 
+	element specifying "com.sonicle.webtop.core" as id, in order to define
+	the main platform data source.
+	
+	<service id="my.service.id">
+		...
+	</service>
+	
+	The <dataSource> element
+	Element that represents a configuration set for a data source.
+	Structure must define the following attributes:
+	- name  (Default: "default")
+		The data source name.
+	- [jdbc4] dataSourceClassName (Required)
+		This is the name of the DataSource class provided by the JDBC driver.
+	- [jdbc4] serverName  (Required)
+	- [jdbc4] port
+	- [jdbc4] databaseName  (Required)
+	- [jdbc3] driverClassName  (Required)
+		This is the name of the Driver class provided by the JDBC driver.
+	- [jdbc3] jdbcUrl  (Required)
+		A suitable connection url to use with specified Driver.
+	- username
+	- password
+	- autoCommit  (Default: true)
+		This property controls the default auto-commit behavior of 
+		connections returned from the pool.
+	- connectionTimeout  (Default: 30000)
+		This property controls the maximum number of milliseconds that 
+		a client (that's you) will wait for a connection from the pool.
+	- idleTimeout  (Default: 600000)
+		This property controls the maximum amount of time that a connection 
+		is allowed to sit idle in the pool. 
+	- maxLifetime  (Default: 1800000)
+		This property controls the maximum lifetime of a connection in the pool. 
+		When a connection reaches this timeout it will be retired from the pool.
+	- minimumIdle  (Default: like maximumPoolSize)
+		This property controls the minimum number of idle connections that 
+		system tries to maintain in the pool.
+	- maximumPoolSize  (Default: 10)
+		This property controls the maximum size that the pool is allowed to 
+		reach, including both idle and in-use connections.
+	
+	Jdbc4 basic example:
+	
+	<dataSource name="my.data.source.name" 
+		dataSourceClassName="my.data.source.class.name" 
+		serverName="my.server.name" 
+		username="my.username" 
+		password="my.password" 
+		databaseName="my.db.name" 
+	/>
+	
+	Jdbc3 basic example:
+	
+	<dataSource name="my.data.source.name" 
+		driverClassName="my.driver.class.name" 
+		jdbcUrl="my.jdbc.url" 
+		username="my.username" 
+		password="my.password" 
+	/>
+-->
+
+<configuration>
+    <service id="com.sonicle.webtop.core">
+		<dataSource name="default"
+			dataSourceClassName="org.postgresql.ds.PGSimpleDataSource"
+			serverName="localhost"
+			username="postgres"
+			password="postgres" 
+			databaseName="webtop5"
+		>
+			<property name="maximumPoolSize" value="10" />
+		</dataSource>
+	</service>
+</configuration>
