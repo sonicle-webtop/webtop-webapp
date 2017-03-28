@@ -37,7 +37,7 @@
 		<dependency>
 			 <groupId>com.sonicle.jasperreports</groupId>
 			 <artifactId>sonicle-jasperreports-fonts</artifactId>
-			 <version>LATEST</version>
+			 <version>1.0</version>
 		</dependency>
 		<dependency>
             <groupId>com.sonicle.webtop</groupId>
