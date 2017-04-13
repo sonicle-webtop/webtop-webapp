@@ -2,7 +2,7 @@
 <configuration scan="true" scanPeriod="30 seconds">
 	<!-- Change logs home value (do not specify trailing directory separator) -->
 	<!-- NB: you can use / as separator for both Win and Unix style OS -->
-	<property scope="context" name="LOGS_HOME" value="/temp/logs"/>
+	<property scope="context" name="LOGS_HOME" value="/sonicle/sonicle/webtop/logs"/>
 	
 	<!-- Standard appender - STDOUT -->
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">

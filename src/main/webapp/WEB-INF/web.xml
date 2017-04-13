@@ -15,14 +15,8 @@
     </listener>
 	<listener>
 		<description>WebTopContextListener</description>
-		<listener-class>com.sonicle.webtop.core.app.ContextListener</listener-class>
+		<listener-class>com.sonicle.webtop.core.app.ContextLoaderListener</listener-class>
 	</listener>
-	<!--
-	<listener>
-		<description>WebTopSessionListener</description>
-		<listener-class>com.sonicle.webtop.core.app.SessionListener</listener-class>
-	</listener>
-	-->
 
 	<filter>
 		<filter-name>ShiroFilter</filter-name>
