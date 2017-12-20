@@ -18,6 +18,16 @@
 		</encoder>
 	</appender>
 	
+	<!-- WT file appender - FILE -->
+	<appender name="wt-file" class="ch.qos.logback.core.FileAppender">
+		<file>${LOGS_HOME}/webtop.log</file>
+		<encoder>
+			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n</pattern>
+		</encoder>
+		<append>true</append>
+		<immediateFlush>true</immediateFlush>
+	</appender>
+	
 	<!-- WT file appender - ROLLING -->
 	<appender name="wt-rollingfile" class="ch.qos.logback.classic.sift.SiftingAppender">
 		<discriminator class="ch.qos.logback.classic.sift.MDCBasedDiscriminator">
