@@ -10,17 +10,28 @@
 	</welcome-file-list>
 	
 	<listener>
-		<description>ShiroEnvironmentListener</description>
         <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
     </listener>
 	<listener>
-		<description>WebTopContextListener</description>
 		<listener-class>com.sonicle.webtop.core.app.ContextLoaderListener</listener-class>
 	</listener>
+	<listener>
+		<listener-class>com.sonicle.webtop.core.shiro.WTContainerSessionListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.atmosphere.cpr.SessionSupport</listener-class>
+	</listener>
+	<!--
+	<context-param>
+		<param-name>org.atmosphere.cpr.sessionSupport</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	-->
 
 	<filter>
 		<filter-name>ShiroFilter</filter-name>
-		<filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
+		<filter-class>com.sonicle.webtop.core.shiro.WTShiroFilter</filter-class>
+		<async-supported>true</async-supported>
 	</filter>
 	<filter-mapping>
 		<filter-name>ShiroFilter</filter-name>
@@ -31,109 +42,20 @@
 		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
 	
-	<!--
-	<filter>
-        <filter-name>RestApiFilter</filter-name>
-        <filter-class>com.sonicle.webtop.core.app.ApiFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>RestApiFilter</filter-name>
-        <url-pattern>/api/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
-        <dispatcher>INCLUDE</dispatcher>
-        <dispatcher>ERROR</dispatcher>
-    </filter-mapping>
-	-->
-	
 	<servlet>
-		<servlet-name>Login</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.Login</servlet-class>
+		<servlet-name>AtmosphereServlet</servlet-name>
+		<servlet-class>com.sonicle.webtop.core.app.atmosphere.AtmosphereServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Login</servlet-name>
-		<url-pattern>/login</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>Logout</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.Logout</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Logout</servlet-name>
-		<url-pattern>/logout</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>Otp</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.Otp</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Otp</servlet-name>
-		<url-pattern>/otp</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>Start</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.Start</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Start</servlet-name>
-		<url-pattern>/start</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>SessionKeepAlive</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.SessionKeepAlive</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>SessionKeepAlive</servlet-name>
-		<url-pattern>/keep-alive</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>ResourceRequest</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.ResourceRequest</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ResourceRequest</servlet-name>
-		<url-pattern>/resources/*</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>ServiceRequest</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.ServiceRequest</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ServiceRequest</servlet-name>
-		<url-pattern>/service-request</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>ServiceRequest</servlet-name>
-		<url-pattern>/ServiceRequest</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>PublicServiceRequest</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.PublicServiceRequest</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>PublicServiceRequest</servlet-name>
-		<url-pattern>/public/*</url-pattern>
+		<servlet-name>AtmosphereServlet</servlet-name>
+		<url-pattern>/push/*</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>RestApiServlet</servlet-name>
-		<!--<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>-->
-		<servlet-class>com.sonicle.webtop.core.servlet.RestApiServlet</servlet-class>
+		<servlet-class>com.sonicle.webtop.core.servlet.RestApi</servlet-class>
 		<init-param>
 			<param-name>javax.ws.rs.Application</param-name>
 			<param-value>com.sonicle.webtop.core.app.RestApiJaxRsApplication</param-value>
@@ -145,7 +67,81 @@
 		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.sonicle.webtop.core.servlet.Login</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>com.sonicle.webtop.core.servlet.Logout</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>OtpServlet</servlet-name>
+		<servlet-class>com.sonicle.webtop.core.servlet.Otp</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OtpServlet</servlet-name>
+		<url-pattern>/otp</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>StartServlet</servlet-name>
+		<servlet-class>com.sonicle.webtop.core.servlet.Start</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StartServlet</servlet-name>
+		<url-pattern>/start</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ResourceRequestServlet</servlet-name>
+		<servlet-class>com.sonicle.webtop.core.servlet.ResourceRequest</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ResourceRequestServlet</servlet-name>
+		<url-pattern>/resources/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PrivateRequestServlet</servlet-name>
+		<servlet-class>com.sonicle.webtop.core.servlet.PrivateRequest</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PrivateRequestServlet</servlet-name>
+		<url-pattern>/service-request</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PrivateRequestServlet</servlet-name>
+		<url-pattern>/ServiceRequest</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PublicRequestServlet</servlet-name>
+		<servlet-class>com.sonicle.webtop.core.servlet.PublicRequest</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PublicRequestServlet</servlet-name>
+		<url-pattern>/public/*</url-pattern>
+	</servlet-mapping>
+	
 	<session-config>
-		<session-timeout>30</session-timeout>
+		<session-timeout>10</session-timeout>
 	</session-config>
 </web-app>
