@@ -18,10 +18,10 @@
 	<listener>
 		<listener-class>com.sonicle.webtop.core.shiro.WTContainerSessionListener</listener-class>
 	</listener>
+	<!--
 	<listener>
 		<listener-class>org.atmosphere.cpr.SessionSupport</listener-class>
 	</listener>
-	<!--
 	<context-param>
 		<param-name>org.atmosphere.cpr.sessionSupport</param-name>
 		<param-value>true</param-value>
@@ -45,6 +45,10 @@
 	<servlet>
 		<servlet-name>AtmosphereServlet</servlet-name>
 		<servlet-class>com.sonicle.webtop.core.app.atmosphere.AtmosphereServlet</servlet-class>
+		<init-param>
+			<param-name>org.atmosphere.cpr.AtmosphereInterceptor</param-name>
+			<param-value>org.atmosphere.interceptor.ShiroInterceptor</param-value>
+		</init-param>
 		<load-on-startup>1</load-on-startup>
 		<async-supported>true</async-supported>
 	</servlet>
@@ -74,7 +78,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
-		<url-pattern>/login</url-pattern>
+		<url-pattern>/login/*</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -84,7 +88,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>LogoutServlet</servlet-name>
-		<url-pattern>/logout</url-pattern>
+		<url-pattern>/logout/*</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -94,7 +98,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>OtpServlet</servlet-name>
-		<url-pattern>/otp</url-pattern>
+		<url-pattern>/otp/*</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -104,7 +108,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>StartServlet</servlet-name>
-		<url-pattern>/start</url-pattern>
+		<url-pattern>/start/*</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
