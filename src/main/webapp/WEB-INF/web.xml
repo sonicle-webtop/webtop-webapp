@@ -18,16 +18,7 @@
 	<listener>
 		<listener-class>com.sonicle.webtop.core.shiro.WTContainerSessionListener</listener-class>
 	</listener>
-	<!--
-	<listener>
-		<listener-class>org.atmosphere.cpr.SessionSupport</listener-class>
-	</listener>
-	<context-param>
-		<param-name>org.atmosphere.cpr.sessionSupport</param-name>
-		<param-value>true</param-value>
-	</context-param>
-	-->
-
+	
 	<filter>
 		<filter-name>ShiroFilter</filter-name>
 		<filter-class>com.sonicle.webtop.core.shiro.WTShiroFilter</filter-class>
@@ -48,6 +39,14 @@
 		<init-param>
 			<param-name>org.atmosphere.cpr.AtmosphereInterceptor</param-name>
 			<param-value>org.atmosphere.interceptor.ShiroInterceptor</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.atmosphere.cpr.sessionSupport</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.atmosphere.runtime.sessionCreate</param-name>
+			<param-value>false</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 		<async-supported>true</async-supported>
