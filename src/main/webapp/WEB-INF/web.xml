@@ -9,6 +9,11 @@
 		<welcome-file>start</welcome-file>
 	</welcome-file-list>
 	
+	<context-param>
+		<param-name>logbackDisableServletContainerInitializer</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
 	<listener>
         <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
     </listener>
