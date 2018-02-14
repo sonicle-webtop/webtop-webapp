@@ -93,10 +93,10 @@
             <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.3</version>
+				<version>3.2.0</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<packagingExcludes>META-INF/context.xml</packagingExcludes>
+					<containerConfigXML>src/main/conf/${profile-name}/META-INF/context.xml</containerConfigXML>
 				</configuration>
             </plugin>
             <plugin>
@@ -133,36 +133,18 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-war-plugin</artifactId>
-						<version>2.3</version>
-						<configuration>
-							<containerConfigXML>src/main/conf/development/META-INF/context.xml</containerConfigXML>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
+			<properties>
+				<profile-name>development</profile-name>
+			</properties>
 		</profile>
 		<profile>
 			<id>profile-production</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-war-plugin</artifactId>
-						<version>2.3</version>
-						<configuration>
-							<containerConfigXML>src/main/conf/production/META-INF/context.xml</containerConfigXML>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
+			<properties>
+				<profile-name>production</profile-name>
+			</properties>
 		</profile>
 	</profiles>
 </project>
