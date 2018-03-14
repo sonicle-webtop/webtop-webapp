@@ -42,21 +42,37 @@
 		<servlet-name>AtmosphereServlet</servlet-name>
 		<servlet-class>com.sonicle.webtop.core.app.atmosphere.AtmosphereServlet</servlet-class>
 		<init-param>
-			<param-name>org.atmosphere.cpr.AtmosphereInterceptor</param-name>
-			<param-value>org.atmosphere.interceptor.ShiroInterceptor</param-value>
+			<param-name>org.atmosphere.cpr.AtmosphereFramework.analytics</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.atmosphere.cpr.broadcasterCacheClass</param-name>
+			<param-value>com.sonicle.webtop.core.app.atmosphere.UUIDBroadcasterCache</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.atmosphere.cpr.broadcasterLifeCyclePolicy</param-name>
+			<param-value>BroadcasterLifeCyclePolicy.EMPTY</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.atmosphere.cpr.asyncSupport</param-name>
+			<param-value>org.atmosphere.container.JSR356AsyncSupport</param-value>
 		</init-param>
 		<init-param>
 			<param-name>org.atmosphere.cpr.sessionSupport</param-name>
 			<param-value>true</param-value>
 		</init-param>
 		<init-param>
-			<param-name>org.atmosphere.runtime.sessionCreate</param-name>
+			<param-name>org.atmosphere.cpr.sessionCreate</param-name>
 			<param-value>false</param-value>
 		</init-param>
 		<init-param>
 			<param-name>org.atmosphere.cpr.broadcaster.shareableThreadPool</param-name>
 			<param-value>true</param-value>
-		</init-param>	
+		</init-param>
+		<init-param>
+			<param-name>org.atmosphere.cpr.AtmosphereInterceptor</param-name>
+			<param-value>org.atmosphere.interceptor.ShiroInterceptor</param-value>
+		</init-param>
 		<load-on-startup>1</load-on-startup>
 		<async-supported>true</async-supported>
 	</servlet>
