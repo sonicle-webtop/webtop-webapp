@@ -74,11 +74,6 @@
             <artifactId>webtop-vfs</artifactId>
             <version>LATEST</version>
         </dependency>
-		<dependency>
-			<groupId>com.sonicle.webtop</groupId>
-			<artifactId>webtop-drm</artifactId>
-			<version>LATEST</version>
-		</dependency>
     </dependencies>
 
     <build>
