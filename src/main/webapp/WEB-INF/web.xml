@@ -81,6 +81,8 @@
 		<url-pattern>/push/*</url-pattern>
 	</servlet-mapping>
 	
+	<!-- Instances of @RestApiServlet will be loaded dynamically -->
+	
 	<servlet>
 		<servlet-name>RestApiServlet</servlet-name>
 		<servlet-class>com.sonicle.webtop.core.servlet.RestApi</servlet-class>
@@ -94,6 +96,7 @@
 		<servlet-name>RestApiServlet</servlet-name>
 		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
+	
 	
 	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
