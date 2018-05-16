@@ -72,54 +72,22 @@
 	
 	<root level="OFF">
 		<!-- Keep commented, otherwise each log entry will be doubled! -->
-		<!--<appender-ref ref="wt-rollingfile" />-->
+		<appender-ref ref="wt-rollingfile" />
 	</root>
-	<logger name="ch.qos.logback" level="OFF">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
-	<logger name="com.zaxxer.hikari" level="ERROR">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
-	<logger name="org.quartz" level="OFF">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
-	<logger name="org.jooq" level="ERROR">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
-	<logger name="org.apache.shiro" level="ERROR">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
-	<logger name="com.sonicle.security" level="ERROR">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
-	<logger name="com.sonicle.commons" level="ERROR">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
-	<logger name="com.sonicle.security" level="ERROR">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
-	<logger name="com.sonicle.mail" level="ERROR">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
-	<logger name="com.sonicle.vfs2" level="ERROR">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
-	<logger name="com.sonicle.webtop.core" level="INFO">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
-	<logger name="com.sonicle.webtop.calendar" level="INFO">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
-	<logger name="com.sonicle.webtop.contacts" level="INFO">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
-	<logger name="com.sonicle.webtop.mail" level="INFO">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
-	<logger name="com.sonicle.webtop.tasks" level="INFO">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
-	<logger name="com.sonicle.webtop.vfs" level="INFO">
-		<appender-ref ref="wt-rollingfile" />
-	</logger>
+	<logger name="ch.qos.logback" level="OFF" />
+	<logger name="com.zaxxer.hikari" level="ERROR" />
+	<logger name="org.jooq" level="ERROR" />
+	<logger name="org.quartz" level="OFF" />
+	<logger name="org.apache.shiro" level="ERROR" />
+	<logger name="com.sonicle.security" level="ERROR" />
+	<logger name="com.sonicle.commons" level="ERROR" />
+	<logger name="com.sonicle.security" level="ERROR" />
+	<logger name="com.sonicle.mail" level="ERROR" />
+	<logger name="com.sonicle.vfs2" level="ERROR" />
+	<logger name="com.sonicle.webtop.core" level="INFO" />
+	<logger name="com.sonicle.webtop.calendar" level="INFO" />
+	<logger name="com.sonicle.webtop.contacts" level="INFO" />
+	<logger name="com.sonicle.webtop.mail" level="INFO" />
+	<logger name="com.sonicle.webtop.tasks" level="INFO" />
+	<logger name="com.sonicle.webtop.vfs" level="INFO" />
 </configuration>
