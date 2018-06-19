@@ -6,7 +6,7 @@
   version="3.1">
 	
 	<welcome-file-list>
-		<welcome-file>beforestart</welcome-file>
+		<welcome-file>ui-private</welcome-file>
 	</welcome-file-list>
 	
 	<context-param>
@@ -38,149 +38,9 @@
 		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
 	
-	<servlet>
-		<servlet-name>AtmosphereServlet</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.app.atmosphere.AtmosphereServlet</servlet-class>
-		<init-param>
-			<param-name>org.atmosphere.cpr.AtmosphereFramework.analytics</param-name>
-			<param-value>false</param-value>
-		</init-param>
-		<init-param>
-			<param-name>org.atmosphere.cpr.broadcasterCacheClass</param-name>
-			<param-value>com.sonicle.webtop.core.app.atmosphere.UUIDBroadcasterCache</param-value>
-		</init-param>
-		<init-param>
-			<param-name>org.atmosphere.cpr.broadcasterLifeCyclePolicy</param-name>
-			<param-value>BroadcasterLifeCyclePolicy.EMPTY</param-value>
-		</init-param>
-		<init-param>
-			<param-name>org.atmosphere.cpr.asyncSupport</param-name>
-			<param-value>org.atmosphere.container.JSR356AsyncSupport</param-value>
-		</init-param>
-		<init-param>
-			<param-name>org.atmosphere.cpr.sessionSupport</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<init-param>
-			<param-name>org.atmosphere.cpr.sessionCreate</param-name>
-			<param-value>false</param-value>
-		</init-param>
-		<init-param>
-			<param-name>org.atmosphere.cpr.broadcaster.shareableThreadPool</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<init-param>
-			<param-name>org.atmosphere.cpr.AtmosphereInterceptor</param-name>
-			<param-value>org.atmosphere.interceptor.ShiroInterceptor</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-		<async-supported>true</async-supported>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AtmosphereServlet</servlet-name>
-		<url-pattern>/push/*</url-pattern>
-	</servlet-mapping>
-	
-	<!-- Instances of @RestApiServlet will be loaded dynamically -->
-	
-	<servlet>
-		<servlet-name>RestApiServlet</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.RestApi</servlet-class>
-		<init-param>
-			<param-name>javax.ws.rs.Application</param-name>
-			<param-value>com.sonicle.webtop.core.app.RestApiJaxRsApplication</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>RestApiServlet</servlet-name>
-		<url-pattern>/api/*</url-pattern>
-	</servlet-mapping>
-	
-	
-	<servlet>
-		<servlet-name>LoginServlet</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.Login</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>LoginServlet</servlet-name>
-		<url-pattern>/login/*</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>LogoutServlet</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.Logout</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>LogoutServlet</servlet-name>
-		<url-pattern>/logout/*</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>BeforeStartServlet</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.app.servlet.BeforeStart</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>BeforeStartServlet</servlet-name>
-		<url-pattern>/beforestart/*</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>OtpServlet</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.Otp</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>OtpServlet</servlet-name>
-		<url-pattern>/otp/*</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>StartServlet</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.Start</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>StartServlet</servlet-name>
-		<url-pattern>/start/*</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>ResourceRequestServlet</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.ResourceRequest</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ResourceRequestServlet</servlet-name>
-		<url-pattern>/resources/*</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>PrivateRequestServlet</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.PrivateRequest</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>PrivateRequestServlet</servlet-name>
-		<url-pattern>/service-request</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>PrivateRequestServlet</servlet-name>
-		<url-pattern>/ServiceRequest</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>PublicRequestServlet</servlet-name>
-		<servlet-class>com.sonicle.webtop.core.servlet.PublicRequest</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>PublicRequestServlet</servlet-name>
-		<url-pattern>/public/*</url-pattern>
-	</servlet-mapping>
+	<!--
+		Servlets are loaded dynamically: see com.sonicle.webtop.core.app.ContextLoader for more info.
+	-->
 	
 	<session-config>
 		<session-timeout>10</session-timeout>
