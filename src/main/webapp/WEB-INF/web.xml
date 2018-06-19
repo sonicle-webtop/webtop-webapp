@@ -6,7 +6,7 @@
   version="3.1">
 	
 	<welcome-file-list>
-		<welcome-file>start</welcome-file>
+		<welcome-file>beforestart</welcome-file>
 	</welcome-file-list>
 	
 	<context-param>
@@ -116,6 +116,16 @@
 	<servlet-mapping>
 		<servlet-name>LogoutServlet</servlet-name>
 		<url-pattern>/logout/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>BeforeStartServlet</servlet-name>
+		<servlet-class>com.sonicle.webtop.core.app.servlet.BeforeStart</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BeforeStartServlet</servlet-name>
+		<url-pattern>/beforestart/*</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
