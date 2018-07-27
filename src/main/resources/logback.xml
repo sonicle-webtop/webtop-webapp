@@ -71,23 +71,30 @@
 	</appender>
 	
 	<root level="OFF">
-		<!-- Keep commented, otherwise each log entry will be doubled! -->
 		<appender-ref ref="wt-rollingfile" />
 	</root>
-	<logger name="ch.qos.logback" level="OFF" />
+	<logger name="ch.qos.logback" level="ERROR" />
 	<logger name="com.zaxxer.hikari" level="ERROR" />
-	<logger name="org.jooq" level="ERROR" />
 	<logger name="org.quartz" level="OFF" />
+	<logger name="org.jooq" level="ERROR" />
 	<logger name="org.apache.shiro" level="ERROR" />
+	<logger name="org.atmosphere" level="ERROR" />
+	<logger name="org.jivesoftware.smack" level="ERROR" />
+	<logger name="org.glassfish.jersey" level="ERROR" />
+	<logger name="io.swagger" level="ERROR" />
+	
 	<logger name="com.sonicle.security" level="ERROR" />
 	<logger name="com.sonicle.commons" level="ERROR" />
 	<logger name="com.sonicle.security" level="ERROR" />
 	<logger name="com.sonicle.mail" level="ERROR" />
 	<logger name="com.sonicle.vfs2" level="ERROR" />
+	
 	<logger name="com.sonicle.webtop.core" level="INFO" />
+	<logger name="com.sonicle.webtop.core.app.atmosphere" level="ERROR" />
 	<logger name="com.sonicle.webtop.calendar" level="INFO" />
 	<logger name="com.sonicle.webtop.contacts" level="INFO" />
 	<logger name="com.sonicle.webtop.mail" level="INFO" />
 	<logger name="com.sonicle.webtop.tasks" level="INFO" />
 	<logger name="com.sonicle.webtop.vfs" level="INFO" />
+	<logger name="com.sonicle.webtop.drm" level="INFO" />
 </configuration>

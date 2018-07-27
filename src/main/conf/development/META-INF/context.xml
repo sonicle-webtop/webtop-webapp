@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/webtop">
+<!-- NetBeans: We need to set path in order to make working deploy in NB -->
+<!-- Tomcat: Revert back original Tomcat (< 8.0.30) behaviour in redirects -->
+<Context path="/webtop" useRelativeRedirects="false">
+	<!-- Tomcat: Disable session persistence across Tomcat restarts -->
 	<Manager pathname="" />
 </Context>

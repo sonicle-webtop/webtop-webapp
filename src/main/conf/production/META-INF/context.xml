@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context>
+<!-- Tomcat: Revert back original Tomcat (< 8.0.30) behaviour in redirects -->
+<Context useRelativeRedirects="false">
+	<!-- Tomcat: Disable session persistence across Tomcat restarts -->
 	<Manager pathname="" />
 </Context>
