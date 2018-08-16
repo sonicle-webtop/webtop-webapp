@@ -91,6 +91,14 @@
 	
 	<logger name="com.sonicle.webtop.core" level="INFO" />
 	<logger name="com.sonicle.webtop.core.app.atmosphere" level="ERROR" />
+	<logger name="com.sonicle.webtop.core.app.servlet" level="ERROR" />
+	<logger name="com.sonicle.webtop.core.app.servlet.Login" level="ERROR" />
+	<logger name="com.sonicle.webtop.core.app.servlet.Logout" level="ERROR" />
+	<logger name="com.sonicle.webtop.core.app.servlet.Otp" level="ERROR" />
+	<logger name="com.sonicle.webtop.core.app.servlet.DocEditor" level="ERROR" />
+	<logger name="com.sonicle.webtop.core.app.servlet.PrivateRequest" level="ERROR" />
+	<logger name="com.sonicle.webtop.core.app.servlet.PublicRequest" level="ERROR" />
+	<logger name="com.sonicle.webtop.core.app.servlet.UIPrivate" level="ERROR" />
 	<logger name="com.sonicle.webtop.calendar" level="INFO" />
 	<logger name="com.sonicle.webtop.contacts" level="INFO" />
 	<logger name="com.sonicle.webtop.mail" level="INFO" />
