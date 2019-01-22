@@ -3,22 +3,19 @@
 	
 	<!--
 		Path where log file is written: defaults to "/var/log/webtop"
-		  value can be set through JVM system propert: "webtop.log.dir"
 		  (do not specify trailing directory separator)
 	-->
-	<property name="LOG_DIR" value="${webtop.log.dir:-/var/log/webtop}" />
+	<property scope="context" name="LOG_DIR" value="${logback.webtop.log.dir:-/var/log/webtop}" />
 	
 	<!--
-		Base log file name: defaults to "webtop"
-		  value can be set through JVM system propert: "webtop.log.file.basename"
+		Base log file name: defaults to webapp-name (or "webtop" at least)
 	-->
-	<property name="LOG_FILE_BASENAME" value="${webtop.log.file.basename:-webtop}" />
+	<property scope="context" name="LOG_FILE_BASENAME" value="${logback.webtop.log.file.basename:-webtop}" />
 	
 	<!--
-		Log appender name to use: defaults to "wt-rollingfile"
-		  value can be set through JVM system propert: "webtop.log.appender"
+		Log appender name to use: defaults to "wt-stdout"
 	-->
-	<property name="LOG_APPENDER" value="${webtop.log.appender:-wt-rollingfile}" />
+	<property scope="context" name="LOG_APPENDER" value="${logback.webtop.log.appender:-wt-stdout}" />
 	
 	
 	
@@ -37,6 +34,7 @@
 	</appender>
 	
 	<!-- WT file appender - FILE -->
+	<!--
 	<appender name="wt-file" class="ch.qos.logback.core.FileAppender">
 		<file>${LOG_DIR}/${LOG_FILE_BASENAME}.log</file>
 		<encoder>
@@ -45,9 +43,10 @@
 		<append>true</append>
 		<immediateFlush>true</immediateFlush>
 	</appender>
+	-->
 	
 	<!-- WT file appender - ROLLING -->
-	<appender name="wt-rollingfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="wt-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_DIR}/${LOG_FILE_BASENAME}.log</file>
 		<encoder>
 			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n</pattern>
