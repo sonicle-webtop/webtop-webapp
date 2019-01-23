@@ -15,69 +15,71 @@
 	<!--
 		Log appender name to use: defaults to "wt-stdout"
 	-->
-	<property scope="context" name="LOG_APPENDER" value="${logback.webtop.log.appender:-wt-stdout}" />
+	<property scope="context" name="LOG_APPENDER" value="${logback.webtop.log.appender:-stdout}" />
 	
 	
-	
-	<!-- Standard appender - STDOUT -->
-	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-		</encoder>
-	</appender>
 	
 	<!-- WT standard appender - STDOUT -->
-	<appender name="wt-stdout" class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n</pattern>
+			<!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
 		</encoder>
 	</appender>
 	
 	<!-- WT file appender - FILE -->
-	<!--
-	<appender name="wt-file" class="ch.qos.logback.core.FileAppender">
-		<file>${LOG_DIR}/${LOG_FILE_BASENAME}.log</file>
-		<encoder>
-			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n</pattern>
-		</encoder>
-		<append>true</append>
-		<immediateFlush>true</immediateFlush>
-	</appender>
-	-->
+	<if condition='property("LOG_APPENDER").equals("file")'>
+		<then>
+			<appender name="file" class="ch.qos.logback.core.FileAppender">
+				<file>${LOG_DIR}/${LOG_FILE_BASENAME}.log</file>
+				<encoder>
+					<pattern>%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n</pattern>
+				</encoder>
+				<append>true</append>
+				<immediateFlush>true</immediateFlush>
+			</appender>
+		</then>
+	</if>
 	
 	<!-- WT file appender - ROLLING -->
-	<appender name="wt-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_DIR}/${LOG_FILE_BASENAME}.log</file>
-		<encoder>
-			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n</pattern>
-		</encoder>
-		<!--
-			RollingPolicy is responsible for the rollover procedure which involves file moving and renaming.
-			You can choose between two different configurations:
-			- TimeBasedRollingPolicy
-				(like: webtop.2017-01-01.log, webtop.2017-01-02.log, and so on...)
-			- FixedWindowRollingPolicy (in conjunction with triggeringPolicy)
-				(like: webtop.1.log, webtop.2.log, and so on...)
-			NB: keep only one 'rollingPolicy' uncommented at the same time!
-		-->
-		<!-- For TimeBasedRollingPolicy uncomment the following -->
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_FILE_BASENAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
-			<maxHistory>15</maxHistory>
-			<totalSizeCap>150MB</totalSizeCap>
-		</rollingPolicy>
-		<!-- For FixedWindowRollingPolicy uncomment the following -->
-		<!--
-		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>${LOG_FILE_BASENAME}.%i.log</fileNamePattern>
-			<minIndex>1</minIndex>
-			<maxIndex>15</maxIndex>
-		</rollingPolicy>
-		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-			<maxFileSize>10MB</maxFileSize>
-		</triggeringPolicy>
-		-->
-	</appender>
+	<if condition='property("LOG_APPENDER").equals("rollingfile")'>
+		<then>
+			<appender name="rollingfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+				<file>${LOG_DIR}/${LOG_FILE_BASENAME}.log</file>
+				<encoder>
+					<pattern>%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n</pattern>
+				</encoder>
+				<!--
+					RollingPolicy is responsible for the rollover procedure which involves file moving and renaming.
+					You can choose between two different configurations:
+					- TimeBasedRollingPolicy
+						(like: webtop.2017-01-01.log, webtop.2017-01-02.log, and so on...)
+					- FixedWindowRollingPolicy (in conjunction with triggeringPolicy)
+						(like: webtop.1.log, webtop.2.log, and so on...)
+					NB: keep only one 'rollingPolicy' uncommented at the same time!
+				-->
+				<!-- For TimeBasedRollingPolicy uncomment the following -->
+				<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+					<fileNamePattern>${LOG_FILE_BASENAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+					<maxHistory>15</maxHistory>
+					<totalSizeCap>150MB</totalSizeCap>
+				</rollingPolicy>
+				<!-- For FixedWindowRollingPolicy uncomment the following -->
+				<!--
+				<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+					<fileNamePattern>${LOG_FILE_BASENAME}.%i.log</fileNamePattern>
+					<minIndex>1</minIndex>
+					<maxIndex>15</maxIndex>
+				</rollingPolicy>
+				<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+					<maxFileSize>10MB</maxFileSize>
+				</triggeringPolicy>
+				-->
+			</appender>
+		</then>
+	</if>
+	
+	
 	
 	<root level="OFF">
 		<appender-ref ref="${LOG_APPENDER}" />
