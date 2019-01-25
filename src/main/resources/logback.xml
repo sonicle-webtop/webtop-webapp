@@ -2,6 +2,11 @@
 <configuration scan="true" scanPeriod="30 seconds">
 	
 	<!--
+		Log appender name to use: defaults to "stdout"
+	-->
+	<property scope="context" name="LOG_APPENDER" value="${logback.webtop.log.appender:-stdout}" />
+	
+	<!--
 		Path where log file is written: defaults to "/var/log/webtop"
 		  (do not specify trailing directory separator)
 	-->
@@ -11,11 +16,6 @@
 		Base log file name: defaults to webapp-name (or "webtop" at least)
 	-->
 	<property scope="context" name="LOG_FILE_BASENAME" value="${logback.webtop.log.file.basename:-webtop}" />
-	
-	<!--
-		Log appender name to use: defaults to "wt-stdout"
-	-->
-	<property scope="context" name="LOG_APPENDER" value="${logback.webtop.log.appender:-stdout}" />
 	
 	
 	
