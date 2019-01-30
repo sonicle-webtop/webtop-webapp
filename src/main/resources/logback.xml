@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="30 seconds">
+	<!--
+		Reads useful properties persisted to 'logback.properties' file in classpath.
+	-->
+	<property resource="logback.properties" />
 	
 	<!--
 		Log appender name to use: defaults to "stdout"
 		NB: value should not be changed here, change it through related system property instead!
 	-->
-	<property scope="context" name="LOG_APPENDER" value="${logback.webtop.log.appender:-stdout}" />
+	<property scope="local" name="LOG_APPENDER" value="${logback.webtop.log.appender:-stdout}" />
 	
 	<!--
 		Path where log file is written: defaults to "/var/log/webtop"
 		  (do not specify trailing directory separator)
 		NB: value should not be changed here, change it through the related system property instead!
 	-->
-	<property scope="context" name="LOG_DIR" value="${logback.webtop.log.dir:-/var/log/webtop}" />
+	<property scope="local" name="LOG_DIR" value="${logback.webtop.log.dir:-/var/log/webtop}" />
 	
 	<!--
 		Base log file name: defaults to webapp-name (or "webtop" at least)
 		NB: value should not be changed here, change it through the related system property instead!
 	-->
-	<property scope="context" name="LOG_FILE_BASENAME" value="${logback.webtop.log.file.basename:-webtop}" />
+	<property scope="local" name="LOG_FILE_BASENAME" value="${logback.webtop.log.file.basename:-webtop}" />
 	
 	
 	
