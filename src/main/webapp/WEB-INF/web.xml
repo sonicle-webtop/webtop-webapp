@@ -21,12 +21,12 @@
 		<listener-class>com.sonicle.webtop.core.app.ContextLoaderListener</listener-class>
 	</listener>
 	<listener>
-		<listener-class>com.sonicle.webtop.core.shiro.WTContainerSessionListener</listener-class>
+		<listener-class>com.sonicle.webtop.core.app.shiro.WTContainerSessionListener</listener-class>
 	</listener>
 	
 	<filter>
 		<filter-name>ShiroFilter</filter-name>
-		<filter-class>com.sonicle.webtop.core.shiro.WTShiroFilter</filter-class>
+		<filter-class>com.sonicle.webtop.core.app.shiro.WTShiroFilter</filter-class>
 		<async-supported>true</async-supported>
 	</filter>
 	<filter-mapping>
