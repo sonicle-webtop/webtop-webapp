@@ -1,98 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="30 seconds">
-	<!--
-		Reads useful properties persisted to 'logback.properties' file in classpath.
-	-->
-	<property resource="logback.properties" />
 	
-	<!--
-		Log appender name to use: defaults to "stdout"
-		NB: value should not be changed here, change it through related system property instead!
-	-->
-	<property scope="local" name="LOG_APPENDER" value="${logback.webtop.log.appender:-stdout}" />
+	<!-- Declare properties used elsewhere in configuration: some static and some dynamically calculated
+		See PropertyDefiner implementation for more info. -->
 	
-	<!--
-		Path where log file is written: defaults to "/var/log/webtop"
-		  (do not specify trailing directory separator)
-		NB: value should not be changed here, change it through the related system property instead!
-	-->
-	<property scope="local" name="LOG_DIR" value="${logback.webtop.log.dir:-/var/log/webtop}" />
+	<property name="LOG_FORMAT" value="%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n" scope="context" />
+	<!--<property name="LOG_FORMAT" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" scope="context" />-->
+	<define name="LOG_TARGET" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
+		<!-- output target type [console | file] -->
+		<key>log.target</key>
+		<defaultValue>console</defaultValue>
+	</define>
+	<define name="LOG_DIR" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
+		<!-- path where log-file is written -->
+		<key>log.dir</key>
+	</define>
+	<define name="LOG_FILE_BASENAME" class="ccom.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
+		<!-- base log-file name -->
+		<key>log.file.basename</key>
+	</define>
+	<define name="LOG_FILE_POLICY" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
+		<!-- log-file policy type [simple | rolling] -->
+		<key>log.file.policy</key>
+	</define>
+	<define name="OVERRIDE_DIR" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
+		<!-- path where to load configuration override file -->
+		<key>override.dir</key>
+	</define>
 	
-	<!--
-		Base log file name: defaults to webapp-name (or "webtop" at least)
-		NB: value should not be changed here, change it through the related system property instead!
-	-->
-	<property scope="local" name="LOG_FILE_BASENAME" value="${logback.webtop.log.file.basename:-webtop}" />
+	<!-- Define logging appenders -->
 	
-	
-	
-	<!-- WT standard appender - STDOUT -->
-	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
-			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n</pattern>
-			<!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
-		</encoder>
-	</appender>
-	
-	<!-- WT file appender - FILE -->
-	<if condition='property("LOG_APPENDER").equals("file")'>
+	<if condition='property("LOG_TARGET").equals("file")'>
 		<then>
-			<appender name="file" class="ch.qos.logback.core.FileAppender">
-				<file>${LOG_DIR}/${LOG_FILE_BASENAME}.log</file>
-				<encoder>
-					<pattern>%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n</pattern>
-				</encoder>
-				<append>true</append>
-				<immediateFlush>true</immediateFlush>
-			</appender>
+			<!-- Define proper file-appender according to type: if 'simple' creates a straight
+				file without any policies, otherwise (the 'rolling' case) define a file 
+				appender using time-based policy with max-size cap. -->
+			<if condition='property("LOG_FILE_POLICY").equals("simple")'>
+				<then>
+					<appender name="webtop.application" class="ch.qos.logback.core.FileAppender">
+						<file>${LOG_DIR}/${LOG_FILE_BASENAME}.log</file>
+						<encoder>
+							<charset>UTF-8</charset>
+							<pattern>${LOG_FORMAT}</pattern>
+						</encoder>
+						<append>true</append>
+						<immediateFlush>true</immediateFlush>
+					</appender>
+				</then>
+				<else>
+					<appender name="webtop.application" class="ch.qos.logback.core.rolling.RollingFileAppender">
+						<file>${LOG_DIR}/${LOG_FILE_BASENAME}.log</file>
+						<encoder>
+							<charset>UTF-8</charset>
+							<pattern>%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n</pattern>
+						</encoder>
+						<!--
+							RollingPolicy is responsible for the rollover procedure which involves file moving and renaming.
+							You can choose between two different configurations:
+							- TimeBasedRollingPolicy
+								(like: webtop.2017-01-01.log, webtop.2017-01-02.log, and so on...)
+							- FixedWindowRollingPolicy (in conjunction with triggeringPolicy)
+								(like: webtop.1.log, webtop.2.log, and so on...)
+							NB: keep only one 'rollingPolicy' uncommented at the same time!
+						-->
+						<!-- For TimeBasedRollingPolicy uncomment the following -->
+						<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+							<fileNamePattern>${LOG_DIR}/${LOG_FILE_BASENAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+							<maxHistory>15</maxHistory>
+							<totalSizeCap>150MB</totalSizeCap>
+						</rollingPolicy>
+						<!-- For FixedWindowRollingPolicy uncomment the following -->
+						<!--
+						<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+							<fileNamePattern>${LOG_DIR}/${LOG_FILE_BASENAME}.%i.log</fileNamePattern>
+							<minIndex>1</minIndex>
+							<maxIndex>15</maxIndex>
+						</rollingPolicy>
+						<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+							<maxFileSize>10MB</maxFileSize>
+						</triggeringPolicy>
+						-->
+					</appender>
+				</else>
+			</if>
+			
+			<!-- Do not set levels here, only add appenders -->
+			<root>
+				<appender-ref ref="webtop.application"/>
+			</root>
 		</then>
+		<else>
+			<!-- If target is set to something different from 'file', we still want to have logging 
+				visible redirecting all to system console. -->
+			<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+				<encoder>
+					<pattern>${LOG_FORMAT}</pattern>
+				</encoder>
+			</appender>
+			
+			<!-- Do not set levels here, only add appenders -->
+			<root>
+				<appender-ref ref="stdout"/>
+			</root>
+		</else>
 	</if>
 	
-	<!-- WT file appender - ROLLING -->
-	<if condition='property("LOG_APPENDER").equals("rollingfile")'>
-		<then>
-			<appender name="rollingfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-				<file>${LOG_DIR}/${LOG_FILE_BASENAME}.log</file>
-				<encoder>
-					<pattern>%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n</pattern>
-				</encoder>
-				<!--
-					RollingPolicy is responsible for the rollover procedure which involves file moving and renaming.
-					You can choose between two different configurations:
-					- TimeBasedRollingPolicy
-						(like: webtop.2017-01-01.log, webtop.2017-01-02.log, and so on...)
-					- FixedWindowRollingPolicy (in conjunction with triggeringPolicy)
-						(like: webtop.1.log, webtop.2.log, and so on...)
-					NB: keep only one 'rollingPolicy' uncommented at the same time!
-				-->
-				<!-- For TimeBasedRollingPolicy uncomment the following -->
-				<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-					<fileNamePattern>${LOG_DIR}/${LOG_FILE_BASENAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
-					<maxHistory>15</maxHistory>
-					<totalSizeCap>150MB</totalSizeCap>
-				</rollingPolicy>
-				<!-- For FixedWindowRollingPolicy uncomment the following -->
-				<!--
-				<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-					<fileNamePattern>${LOG_DIR}/${LOG_FILE_BASENAME}.%i.log</fileNamePattern>
-					<minIndex>1</minIndex>
-					<maxIndex>15</maxIndex>
-				</rollingPolicy>
-				<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-					<maxFileSize>10MB</maxFileSize>
-				</triggeringPolicy>
-				-->
-			</appender>
-		</then>
-	</if>
+	<!-- Following is configuration for different logging levels. Please do *not* setup appenders here. That work
+		should be done above, inside the <if/> directive, so that the correct appenders are added in all cases.
+	-->
+	<!-- Configuration for the root logger -->
+	<root level="WARN"/>
 	
-	
-	
-	<root level="OFF">
-		<appender-ref ref="${LOG_APPENDER}" />
-	</root>
+	<!-- Third-party libraries and frameworks logging -->
 	<logger name="ch.qos.logback" level="ERROR" />
-	<logger name="com.zaxxer.hikari" level="WARN" />
+	<logger name="com.zaxxer.hikari" level="ERROR" />
 	<logger name="org.quartz" level="OFF" />
 	<logger name="org.jooq" level="ERROR" />
 	<logger name="org.apache.shiro" level="ERROR" />
@@ -101,12 +122,14 @@
 	<logger name="org.glassfish.jersey" level="ERROR" />
 	<logger name="io.swagger" level="ERROR" />
 	
+	<!-- Our libraries logging -->
 	<logger name="com.sonicle.security" level="ERROR" />
 	<logger name="com.sonicle.commons" level="ERROR" />
 	<logger name="com.sonicle.security" level="ERROR" />
 	<logger name="com.sonicle.mail" level="ERROR" />
 	<logger name="com.sonicle.vfs2" level="ERROR" />
 	
+	<!-- WebTop logging -->
 	<logger name="com.sonicle.webtop.core" level="INFO" />
 	<logger name="com.sonicle.webtop.core.job" level="ERROR" />
 	<logger name="com.sonicle.webtop.core.rest" level="ERROR" />
@@ -126,4 +149,23 @@
 	<logger name="com.sonicle.webtop.tasks.rest" level="ERROR" />
 	<logger name="com.sonicle.webtop.vfs" level="INFO" />
 	<logger name="com.sonicle.webtop.drm" level="INFO" />
+	
+	<!-- Lastly, give customers the ability to define *their own* logback.xml which will be processed in
+		addition to this one, giving them the ability to modify logging levels at will without forcing
+		them to modify original files directly.
+		
+		WARNING: Do not use ${override.dir}-style property replacement here. Because the returned String is
+		compiled into Java code by Janino internally, doing so causes backslashes to be removed on Windows
+		and results in logback.xml not being included even if it is present. Calling property("override.dir")
+		returns the same value but does so in a way that is safe to be compiled. -->
+	<if condition='isDefined("OVERRIDE_DIR")'>
+		<then>
+			<if condition='new java.io.File(property("OVERRIDE_DIR"), "logback.xml").exists()'>
+				<then>
+					<include file="${OVERRIDE_DIR}/logback.xml"/>
+				</then>
+			</if>
+		</then>
+	</if>
+	
 </configuration>
