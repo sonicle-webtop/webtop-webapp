@@ -15,7 +15,7 @@
 		<!-- path where log-file is written -->
 		<key>log.dir</key>
 	</define>
-	<define name="LOG_FILE_BASENAME" class="ccom.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
+	<define name="LOG_FILE_BASENAME" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
 		<!-- base log-file name -->
 		<key>log.file.basename</key>
 	</define>
