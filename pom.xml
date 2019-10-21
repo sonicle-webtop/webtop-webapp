@@ -6,15 +6,19 @@
     <version>5</version>
     <packaging>war</packaging>
     <name>webtop-webapp</name>
+	
+	<parent>
+		<groupId>com.sonicle.maven</groupId>
+		<artifactId>sonicle-superpom</artifactId>
+		<version>1</version>
+	</parent>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
-		<!-- MAVEN PLUGINS VERSIONS -->
+		<!-- MAVEN: build-plugins versions -->
 		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
 		<maven-war-plugin.version>3.2.0</maven-war-plugin.version>
-		<maven-dependency-plugin.version>3.0.2</maven-dependency-plugin.version>
     </properties>
     
     <dependencies>
@@ -86,10 +90,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven-compiler-plugin.version}</version>
+				<version>3.7.0</version>
+				<!--<version>${maven-compiler-plugin.version}</version>-->
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
