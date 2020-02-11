@@ -19,6 +19,8 @@
 		<!-- MAVEN: build-plugins versions -->
 		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
 		<maven-war-plugin.version>3.2.0</maven-war-plugin.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     
     <dependencies>

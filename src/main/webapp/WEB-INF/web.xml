@@ -23,7 +23,19 @@
 	<listener>
 		<listener-class>com.sonicle.webtop.core.app.shiro.WTContainerSessionListener</listener-class>
 	</listener>
-	
+	<!-- Example for RequestDumperFilter -->
+	<!--
+	<filter>
+		<filter-name>requestdumper</filter-name>
+		<filter-class>
+			org.apache.catalina.filters.RequestDumperFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>requestdumper</filter-name>
+		<url-pattern>/service-request</url-pattern>
+	</filter-mapping>
+	-->
 	<filter>
 		<filter-name>ShiroFilter</filter-name>
 		<filter-class>com.sonicle.webtop.core.app.shiro.WTShiroFilter</filter-class>
