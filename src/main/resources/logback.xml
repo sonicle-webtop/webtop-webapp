@@ -121,6 +121,8 @@
 	<logger name="org.jivesoftware.smack" level="ERROR" />
 	<logger name="org.glassfish.jersey" level="ERROR" />
 	<logger name="io.swagger" level="ERROR" />
+	<!-- Suppress noisy logging from jericho -->
+	<logger name="net.htmlparser.jericho" level="OFF" />
 	
 	<!-- Our libraries logging -->
 	<logger name="com.sonicle.security" level="ERROR" />
