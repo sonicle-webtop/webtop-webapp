@@ -162,9 +162,9 @@
 		returns the same value but does so in a way that is safe to be compiled. -->
 	<if condition='isDefined("OVERRIDE_DIR")'>
 		<then>
-			<if condition='new java.io.File(property("OVERRIDE_DIR"), "logback.xml").exists()'>
+			<if condition='new java.io.File(property("OVERRIDE_DIR"), "logback-override.xml").exists()'>
 				<then>
-					<include file="${OVERRIDE_DIR}/logback.xml"/>
+					<include file="${OVERRIDE_DIR}/logback-override.xml"/>
 				</then>
 			</if>
 		</then>
