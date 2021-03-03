@@ -8,9 +8,9 @@
     <name>webtop-webapp</name>
 	
 	<parent>
-		<groupId>com.sonicle.maven</groupId>
-		<artifactId>sonicle-superpom</artifactId>
-		<version>1</version>
+		<groupId>com.sonicle.webtop</groupId>
+		<artifactId>webtop-superpom</artifactId>
+		<version>2</version>
 	</parent>
 
     <properties>
@@ -33,12 +33,12 @@
 		<dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>1.2.1</version>
+            <version>${logback.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.1</version>
+            <version>${logback.version}</version>
         </dependency>
 		<dependency>
 			<groupId>org.codehaus.janino</groupId>
