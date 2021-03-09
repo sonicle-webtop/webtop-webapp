@@ -6,22 +6,27 @@
 	
 	<property name="LOG_FORMAT" value="%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n" scope="context" />
 	<!--<property name="LOG_FORMAT" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" scope="context" />-->
-	<define name="LOG_TARGET" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
-		<!-- output target type [console | file] -->
-		<key>log.target</key>
-		<defaultValue>console</defaultValue>
-	</define>
 	<define name="LOG_DIR" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
-		<!-- path where log-file is written -->
+		<!-- path where log files are written -->
 		<key>log.dir</key>
 	</define>
 	<define name="LOG_FILE_BASENAME" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
 		<!-- base log-file name -->
 		<key>log.file.basename</key>
 	</define>
-	<define name="LOG_FILE_POLICY" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
-		<!-- log-file policy type [simple | rolling] -->
-		<key>log.file.policy</key>
+	<define name="LOG_MAIN_TARGET" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
+		<!-- main log output target type [console | file] -->
+		<key>log.main.target</key>
+		<defaultValue>console</defaultValue>
+	</define>
+	<define name="LOG_MAIN_FILE_POLICY" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
+		<!-- main log file-policy type [simple | rolling] -->
+		<key>log.main.file.policy</key>
+	</define>
+	<define name="LOG_AUTH_TARGET" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
+		<!-- auth log target type [none | file] -->
+		<key>log.auth.target</key>
+		<defaultValue>none</defaultValue>
 	</define>
 	<define name="OVERRIDE_DIR" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
 		<!-- path where to load configuration override file -->
@@ -29,15 +34,14 @@
 	</define>
 	
 	<!-- Define logging appenders -->
-	
-	<if condition='property("LOG_TARGET").equals("file")'>
+	<if condition='property("LOG_MAIN_TARGET").equals("file")'>
 		<then>
 			<!-- Define proper file-appender according to type: if 'simple' creates a straight
 				file without any policies, otherwise (the 'rolling' case) define a file 
 				appender using time-based policy with max-size cap. -->
-			<if condition='property("LOG_FILE_POLICY").equals("simple")'>
+			<if condition='property("LOG_MAIN_FILE_POLICY").equals("simple")'>
 				<then>
-					<appender name="webtop.application" class="ch.qos.logback.core.FileAppender">
+					<appender name="webtop.application-main" class="ch.qos.logback.core.FileAppender">
 						<file>${LOG_DIR}/${LOG_FILE_BASENAME}.log</file>
 						<encoder>
 							<charset>UTF-8</charset>
@@ -48,7 +52,7 @@
 					</appender>
 				</then>
 				<else>
-					<appender name="webtop.application" class="ch.qos.logback.core.rolling.RollingFileAppender">
+					<appender name="webtop.application-main" class="ch.qos.logback.core.rolling.RollingFileAppender">
 						<file>${LOG_DIR}/${LOG_FILE_BASENAME}.log</file>
 						<encoder>
 							<charset>UTF-8</charset>
@@ -86,7 +90,7 @@
 			
 			<!-- Do not set levels here, only add appenders -->
 			<root>
-				<appender-ref ref="webtop.application"/>
+				<appender-ref ref="webtop.application-main"/>
 			</root>
 		</then>
 		<else>
@@ -103,6 +107,19 @@
 				<appender-ref ref="stdout"/>
 			</root>
 		</else>
+	</if>
+	<if condition='"file".equals(property("LOG_AUTH_TARGET"))'>
+		<then>
+			<appender name="webtop.application-auth" class="ch.qos.logback.core.FileAppender">
+				<file>${LOG_DIR}/${LOG_FILE_BASENAME}_auth.log</file>
+				<encoder>
+					<charset>UTF-8</charset>
+					<pattern>%date{yyyy-MM-dd HH:mm:ss} [%-5level] %replace(%msg){'\s+$',''}%n</pattern>
+				</encoder>
+				<append>true</append>
+				<immediateFlush>true</immediateFlush>
+			</appender>
+		</then>
 	</if>
 	
 	<!-- Following is configuration for different logging levels. Please do *not* setup appenders here. That work
@@ -131,7 +148,16 @@
 	<logger name="com.sonicle.mail" level="ERROR" />
 	<logger name="com.sonicle.vfs2" level="ERROR" />
 	
-	<!-- WebTop logging -->
+	<!-- WebTop logging (auth) -->
+	<logger name="com.sonicle.webtop.AuthLog" level="TRACE" additivity="false">
+		<if condition='"file".equals(property("LOG_AUTH_TARGET"))'>
+			<then>
+				<appender-ref ref="webtop.application-auth" />
+			</then>
+		</if>
+	</logger>
+	
+	<!-- WebTop logging (main) -->
 	<logger name="com.sonicle.webtop.core" level="INFO" />
 	<logger name="com.sonicle.webtop.core.job" level="ERROR" />
 	<logger name="com.sonicle.webtop.core.rest" level="ERROR" />
