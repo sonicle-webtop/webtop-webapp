@@ -156,5 +156,31 @@
 				<profile-name>production</profile-name>
 			</properties>
 		</profile>
+		<profile>
+			<id>bundle-drm</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>com.sonicle.webtop</groupId>
+					<artifactId>webtop-drm</artifactId>
+					<version>LATEST</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>bundle-tmceplugins</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>com.sonicle.webtop</groupId>
+					<artifactId>webtop-tmceplugins</artifactId>
+					<version>LATEST</version>
+				</dependency>
+			</dependencies>
+		</profile>
 	</profiles>
 </project>
