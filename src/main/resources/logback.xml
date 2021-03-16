@@ -161,6 +161,7 @@
 	<logger name="com.sonicle.webtop.core" level="INFO" />
 	<logger name="com.sonicle.webtop.core.job" level="ERROR" />
 	<logger name="com.sonicle.webtop.core.rest" level="ERROR" />
+	<logger name="com.sonicle.webtop.core.app.SettingsManager" level="ERROR" />
 	<logger name="com.sonicle.webtop.core.app.atmosphere" level="ERROR" />
 	<logger name="com.sonicle.webtop.core.app.servlet" level="ERROR" />
 	<logger name="com.sonicle.webtop.core.shiro" level="ERROR" />
