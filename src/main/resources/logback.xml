@@ -137,7 +137,7 @@
 				<syslogHost>${SYSLOG_HOST}</syslogHost>
 				<port>${SYSLOG_PORT}</port>
 				<facility>AUTH</facility>
-				<suffixPattern>%replace(%msg){'\s+$',''}%n</suffixPattern>
+				<suffixPattern>[%-5level]%replace(%msg){'\s+$',''}%n</suffixPattern>
 			</appender>
 		</then>
 	</if>
