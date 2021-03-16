@@ -24,13 +24,23 @@
 		<key>log.main.file.policy</key>
 	</define>
 	<define name="LOG_AUTH_TARGET" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
-		<!-- auth log target type [none | file] -->
+		<!-- auth log target type [none | file | syslog] -->
 		<key>log.auth.target</key>
 		<defaultValue>none</defaultValue>
 	</define>
 	<define name="OVERRIDE_DIR" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
 		<!-- path where to load configuration override file -->
 		<key>override.dir</key>
+	</define>
+	<define name="SYSLOG_HOST" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
+		<!-- remote syslog server hostname -->
+		<key>syslog.host</key>
+		<defaultValue>localhost</defaultValue>
+	</define>
+	<define name="SYSLOG_PORT" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
+		<!-- remote syslog server port -->
+		<key>syslog.port</key>
+		<defaultValue>514</defaultValue>
 	</define>
 	
 	<!-- Define logging appenders -->
@@ -121,6 +131,16 @@
 			</appender>
 		</then>
 	</if>
+	<if condition='"syslog".equals(property("LOG_AUTH_TARGET"))'>
+		<then>
+			<appender name="webtop.application-auth" class="ch.qos.logback.classic.net.SyslogAppender">
+				<syslogHost>${SYSLOG_HOST}</syslogHost>
+				<port>${SYSLOG_PORT}</port>
+				<facility>AUTH</facility>
+				<suffixPattern>%replace(%msg){'\s+$',''}%n</suffixPattern>
+			</appender>
+		</then>
+	</if>
 	
 	<!-- Following is configuration for different logging levels. Please do *not* setup appenders here. That work
 		should be done above, inside the <if/> directive, so that the correct appenders are added in all cases.
@@ -150,7 +170,7 @@
 	
 	<!-- WebTop logging (auth) -->
 	<logger name="com.sonicle.webtop.AuthLog" level="TRACE" additivity="false">
-		<if condition='"file".equals(property("LOG_AUTH_TARGET"))'>
+		<if condition='"file".equals(property("LOG_AUTH_TARGET")) || "syslog".equals(property("LOG_AUTH_TARGET"))'>
 			<then>
 				<appender-ref ref="webtop.application-auth" />
 			</then>
