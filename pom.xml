@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>com.sonicle.webtop</groupId>
 		<artifactId>webtop-superpom</artifactId>
-		<version>2</version>
+		<version>3</version>
 	</parent>
 
     <properties>
