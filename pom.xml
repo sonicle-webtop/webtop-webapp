@@ -152,6 +152,9 @@
 			<properties>
 				<profile-name>development</profile-name>
 			</properties>
+			<build>
+				<finalName>${artifactId}-5</finalName>
+			</build>
 		</profile>
 		<profile>
 			<id>profile-production</id>
