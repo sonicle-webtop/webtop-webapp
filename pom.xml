@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>com.sonicle.webtop</groupId>
 		<artifactId>webtop-superpom</artifactId>
-		<version>4</version>
+		<version>5</version>
 	</parent>
 
     <properties>
@@ -48,8 +48,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <!--<version>9.3-1102-jdbc4</version>-->
-			<version>42.2.19</version>
+			<version>${postgresql.version}</version>
         </dependency>
 		<dependency>
 			 <groupId>com.sonicle.jasperreports</groupId>

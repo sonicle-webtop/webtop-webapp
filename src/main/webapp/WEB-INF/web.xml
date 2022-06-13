@@ -48,6 +48,7 @@
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
 		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
 	</filter-mapping>
 	
 	<!--
