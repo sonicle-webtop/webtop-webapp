@@ -59,7 +59,6 @@
 		<session-timeout>10</session-timeout>
 		<cookie-config>
 			<http-only>true</http-only>
-			<secure>true</secure>
 		</cookie-config>
 	</session-config>
 </web-app>
