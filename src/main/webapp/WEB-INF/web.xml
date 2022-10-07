@@ -59,6 +59,7 @@
 		<session-timeout>10</session-timeout>
 		<cookie-config>
 			<http-only>true</http-only>
+			<!-- 'secure' property needs to be enforced where SSL termination is managed (usually during proxy-pass) -->
 		</cookie-config>
 	</session-config>
 </web-app>
