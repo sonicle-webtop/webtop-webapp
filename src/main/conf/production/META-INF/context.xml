@@ -3,6 +3,4 @@
 <Context useRelativeRedirects="false">
 	<!-- Tomcat: Disable session persistence across Tomcat restarts -->
 	<Manager pathname="" />
-	<!-- Use Tomcat's Valve to analyze 'X-Forwarded-*' headers for automatically marking the Request as 'Secure' -->
-	<Valve className="org.apache.catalina.valves.RemoteIpValve" />
 </Context>
