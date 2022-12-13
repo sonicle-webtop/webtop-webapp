@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>com.sonicle.webtop</groupId>
 		<artifactId>webtop-superpom</artifactId>
-		<version>5</version>
+		<version>6</version>
 	</parent>
 
     <properties>
@@ -87,11 +87,13 @@
 			<artifactId>webtop-tasks</artifactId>
 			<version>LATEST</version>
 		</dependency>
-        <dependency>
+        
+		<dependency>
             <groupId>com.sonicle.webtop</groupId>
             <artifactId>webtop-mail</artifactId>
             <version>LATEST</version>
         </dependency>
+		
 		<dependency>
             <groupId>com.sonicle.webtop</groupId>
             <artifactId>webtop-vfs</artifactId>
