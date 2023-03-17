@@ -180,21 +180,24 @@
 	<!-- WebTop logging (main) -->
 	<logger name="com.sonicle.webtop.core" level="INFO" />
 	<logger name="com.sonicle.webtop.core.job" level="ERROR" />
+	<logger name="com.sonicle.webtop.core.bg" level="ERROR" />
 	<logger name="com.sonicle.webtop.core.rest" level="ERROR" />
 	<logger name="com.sonicle.webtop.core.app.SettingsManager" level="ERROR" />
 	<logger name="com.sonicle.webtop.core.app.atmosphere" level="ERROR" />
 	<logger name="com.sonicle.webtop.core.app.servlet" level="ERROR" />
 	<logger name="com.sonicle.webtop.core.shiro" level="ERROR" />
 	<logger name="com.sonicle.webtop.calendar" level="INFO" />
-	<logger name="com.sonicle.webtop.calendar.job" level="ERROR" />
+	<logger name="com.sonicle.webtop.calendar.bg" level="ERROR" />
 	<logger name="com.sonicle.webtop.calendar.rest" level="ERROR" />
 	<logger name="com.sonicle.webtop.contacts" level="INFO" />
-	<logger name="com.sonicle.webtop.contacts.job" level="ERROR" />
+	<logger name="com.sonicle.webtop.contacts.bg" level="ERROR" />
 	<logger name="com.sonicle.webtop.contacts.rest" level="ERROR" />
 	<logger name="com.sonicle.webtop.mail" level="INFO" />
+	<logger name="com.sonicle.webtop.mail.bg" level="ERROR" />
 	<logger name="com.sonicle.webtop.mail.job" level="ERROR" />
 	<logger name="com.sonicle.webtop.mail.rest" level="ERROR" />
 	<logger name="com.sonicle.webtop.tasks" level="INFO" />
+	<logger name="com.sonicle.webtop.tasks.bg" level="ERROR" />
 	<logger name="com.sonicle.webtop.tasks.rest" level="ERROR" />
 	<logger name="com.sonicle.webtop.vfs" level="INFO" />
 	<logger name="com.sonicle.webtop.drm" level="INFO" />
