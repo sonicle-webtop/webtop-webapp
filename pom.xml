@@ -204,5 +204,18 @@
 				</dependency>
 			</dependencies>
 		</profile>
+		<profile>
+			<id>bundle-nethesis-theme</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>com.nethesis.webtop</groupId>
+					<artifactId>webtop-nethesis-laf</artifactId>
+					<version>LATEST</version>
+				</dependency>
+			</dependencies>
+		</profile>
 	</profiles>
 </project>
