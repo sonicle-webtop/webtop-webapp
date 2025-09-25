@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.sonicle.webtop</groupId>
     <artifactId>webtop-webapp</artifactId>
-    <version>5.29.2</version>
+    <version>5.29.3</version>
     <packaging>war</packaging>
     <name>webtop-webapp</name>
 	
@@ -75,7 +75,7 @@
         <dependency>
             <groupId>com.sonicle.webtop</groupId>
             <artifactId>webtop-calendar</artifactId>
-            <version>5.23.3</version>
+            <version>5.23.4</version>
         </dependency>
 		<dependency>
 			<groupId>com.sonicle.webtop</groupId>
@@ -91,7 +91,7 @@
 		<dependency>
             <groupId>com.sonicle.webtop</groupId>
             <artifactId>webtop-mail</artifactId>
-            <version>5.25.2</version>
+            <version>5.25.3</version>
         </dependency>
 		
 		<dependency>
