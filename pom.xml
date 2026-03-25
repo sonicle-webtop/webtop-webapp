@@ -21,6 +21,11 @@
 		<maven-war-plugin.version>3.2.0</maven-war-plugin.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+		
+		<!-- WEBTOP: optional profile-activated dependency versions -->
+		<webtop.bundle.drm.version>LATEST</webtop.bundle.drm.version>
+		<webtop.bundle.tmceplugins.version>LATEST</webtop.bundle.tmceplugins.version>
+		<webtop.bundle.nethesislaf.version>LATEST</webtop.bundle.nethesislaf.version>
     </properties>
     
     <dependencies>
@@ -87,13 +92,11 @@
 			<artifactId>webtop-tasks</artifactId>
 			<version>5.18.0</version>
 		</dependency>
-        
 		<dependency>
             <groupId>com.sonicle.webtop</groupId>
             <artifactId>webtop-mail</artifactId>
             <version>5.26.5</version>
         </dependency>
-		
 		<dependency>
             <groupId>com.sonicle.webtop</groupId>
             <artifactId>webtop-vfs</artifactId>
@@ -166,7 +169,7 @@
 				<profile-name>development</profile-name>
 			</properties>
 			<build>
-				<finalName>${artifactId}-5</finalName>
+				<finalName>${project.artifactId}-5</finalName>
 			</build>
 		</profile>
 		<profile>
@@ -187,7 +190,7 @@
 				<dependency>
 					<groupId>com.sonicle.webtop</groupId>
 					<artifactId>webtop-drm</artifactId>
-					<version>LATEST</version>
+					<version>${webtop.bundle.drm.version}</version>
 				</dependency>
 			</dependencies>
 		</profile>
@@ -200,7 +203,7 @@
 				<dependency>
 					<groupId>com.sonicle.webtop</groupId>
 					<artifactId>webtop-tmceplugins</artifactId>
-					<version>LATEST</version>
+					<version>${webtop.bundle.tmceplugins.version}</version>
 				</dependency>
 			</dependencies>
 		</profile>
@@ -213,7 +216,7 @@
 				<dependency>
 					<groupId>com.nethesis.webtop</groupId>
 					<artifactId>webtop-nethesis-laf</artifactId>
-					<version>LATEST</version>
+					<version>${webtop.bundle.nethesislaf.version}</version>
 				</dependency>
 			</dependencies>
 		</profile>

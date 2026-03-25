@@ -4,7 +4,7 @@
 	<!-- Declare properties used elsewhere in configuration: some static and some dynamically calculated
 		See PropertyDefiner implementation for more info. -->
 	
-	<property name="LOG_FORMAT" value="%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'\s+$',''}%n" scope="context" />
+	<property name="LOG_FORMAT" value="%date{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{36} - %replace(%msg){'[ \t\r\n]+$',''}%n" scope="context" />
 	<!--<property name="LOG_FORMAT" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" scope="context" />-->
 	<define name="LOG_DIR" class="com.sonicle.webtop.core.app.LogbackPropertyDefiner" scope="context">
 		<!-- path where log files are written -->
@@ -185,7 +185,9 @@
 	<logger name="com.sonicle.webtop.core.app.SettingsManager" level="ERROR" />
 	<logger name="com.sonicle.webtop.core.app.atmosphere" level="ERROR" />
 	<logger name="com.sonicle.webtop.core.app.servlet" level="ERROR" />
-	<logger name="com.sonicle.webtop.core.shiro" level="ERROR" />
+	<logger name="com.sonicle.webtop.core.app.shiro" level="ERROR" />
+	<logger name="com.sonicle.webtop.core.app.shiro.filter" level="ERROR" />
+	<logger name="com.sonicle.webtop.core.app.shiro.filter.RequestDumper" level="OFF" />
 	<logger name="com.sonicle.webtop.calendar" level="INFO" />
 	<logger name="com.sonicle.webtop.calendar.bg" level="ERROR" />
 	<logger name="com.sonicle.webtop.calendar.rest" level="ERROR" />
