@@ -23,9 +23,9 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 		
 		<!-- WEBTOP: optional profile-activated dependency versions -->
-		<webtop.bundle.drm.version>LATEST</webtop.bundle.drm.version>
-		<webtop.bundle.tmceplugins.version>LATEST</webtop.bundle.tmceplugins.version>
-		<webtop.bundle.nethesislaf.version>LATEST</webtop.bundle.nethesislaf.version>
+		<webtop.bundle.drm.version>[5.0,6.0-alpha)</webtop.bundle.drm.version>
+		<webtop.bundle.tmceplugins.version>[7.9.1,7.9.2-alpha)</webtop.bundle.tmceplugins.version>
+		<webtop.bundle.nethesislaf.version>[2.1,3.0-alpha)</webtop.bundle.nethesislaf.version>
 	</properties>
     
     <dependencies>
@@ -75,32 +75,32 @@
 		<dependency>
             <groupId>com.sonicle.webtop</groupId>
             <artifactId>webtop-core</artifactId>
-            <version>LATEST</version>
+            <version>[5.0,6.0-alpha)</version>
         </dependency>
         <dependency>
             <groupId>com.sonicle.webtop</groupId>
             <artifactId>webtop-calendar</artifactId>
-            <version>LATEST</version>
+            <version>[5.0,6.0-alpha)</version>
         </dependency>
 		<dependency>
 			<groupId>com.sonicle.webtop</groupId>
 			<artifactId>webtop-contacts</artifactId>
-			<version>LATEST</version>
+			<version>[5.0,6.0-alpha)</version>
 		</dependency>
 		<dependency>
 			<groupId>com.sonicle.webtop</groupId>
 			<artifactId>webtop-tasks</artifactId>
-			<version>LATEST</version>
+			<version>[5.0,6.0-alpha)</version>
 		</dependency>
 		<dependency>
             <groupId>com.sonicle.webtop</groupId>
             <artifactId>webtop-mail</artifactId>
-            <version>LATEST</version>
+            <version>[5.0,6.0-alpha)</version>
         </dependency>
 		<dependency>
             <groupId>com.sonicle.webtop</groupId>
             <artifactId>webtop-vfs</artifactId>
-            <version>LATEST</version>
+            <version>[5.0,6.0-alpha)</version>
         </dependency>
     </dependencies>
 
