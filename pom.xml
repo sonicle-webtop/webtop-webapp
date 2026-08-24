@@ -24,7 +24,7 @@
 		
 		<!-- WEBTOP: optional profile-activated dependency versions -->
 		<webtop.bundle.drm.version>[5.0,6.0-alpha)</webtop.bundle.drm.version>
-		<webtop.bundle.tmceplugins.version>[7.9.1,7.9.2-alpha)</webtop.bundle.tmceplugins.version>
+		<webtop.bundle.tmceplugins.version>7.9.1.0</webtop.bundle.tmceplugins.version>
 		<webtop.bundle.nethesislaf.version>[2.1,3.0-alpha)</webtop.bundle.nethesislaf.version>
 	</properties>
     
