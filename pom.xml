@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.sonicle.webtop</groupId>
     <artifactId>webtop-webapp</artifactId>
-    <version>5.34.2</version>
+    <version>5.35.0</version>
     <packaging>war</packaging>
     <name>webtop-webapp</name>
 	
@@ -23,9 +23,9 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 		
 		<!-- WEBTOP: optional profile-activated dependency versions -->
-		<webtop.bundle.drm.version>[5.0,6.0-alpha)</webtop.bundle.drm.version>
+		<webtop.bundle.drm.version>5.16.0</webtop.bundle.drm.version>
 		<webtop.bundle.tmceplugins.version>7.9.1.0</webtop.bundle.tmceplugins.version>
-		<webtop.bundle.nethesislaf.version>[2.1,3.0-alpha)</webtop.bundle.nethesislaf.version>
+		<webtop.bundle.nethesislaf.version>2.2.0</webtop.bundle.nethesislaf.version>
 	</properties>
     
     <dependencies>
@@ -75,32 +75,32 @@
 		<dependency>
             <groupId>com.sonicle.webtop</groupId>
             <artifactId>webtop-core</artifactId>
-            <version>[5.0,6.0-alpha)</version>
+            <version>5.27.1</version>
         </dependency>
         <dependency>
             <groupId>com.sonicle.webtop</groupId>
             <artifactId>webtop-calendar</artifactId>
-            <version>[5.0,6.0-alpha)</version>
+            <version>5.27.0</version>
         </dependency>
 		<dependency>
 			<groupId>com.sonicle.webtop</groupId>
 			<artifactId>webtop-contacts</artifactId>
-			<version>[5.0,6.0-alpha)</version>
+			<version>5.24.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.sonicle.webtop</groupId>
 			<artifactId>webtop-tasks</artifactId>
-			<version>[5.0,6.0-alpha)</version>
+			<version>5.20.0</version>
 		</dependency>
 		<dependency>
             <groupId>com.sonicle.webtop</groupId>
             <artifactId>webtop-mail</artifactId>
-            <version>[5.0,6.0-alpha)</version>
+            <version>5.31.1</version>
         </dependency>
 		<dependency>
             <groupId>com.sonicle.webtop</groupId>
             <artifactId>webtop-vfs</artifactId>
-            <version>[5.0,6.0-alpha)</version>
+            <version>5.15.0</version>
         </dependency>
     </dependencies>
 
